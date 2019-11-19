@@ -8,20 +8,22 @@ export class RecipeService {
   recipeSelected = new Subject<Recipe>();
   recipesChanged = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [
-    new Recipe(
-      'Test Recipe',
-      'This is a test',
-      'https://scx1.b-cdn.net/csz/news/800/2016/howcuttingdo.jpg',
-      [new Ingredient('Meat', 1), new Ingredient('Potato', 10)]
-    ),
-    new Recipe(
-      'Hamburger',
-      'Tasty hamburger',
-      'https://scx1.b-cdn.net/csz/news/800/2016/howcuttingdo.jpg',
-      [new Ingredient('Bread', 2), new Ingredient('Tomato', 2)]
-    ),
-  ];
+  // private recipes: Recipe[] = [
+  //   new Recipe(
+  //     'Test Recipe',
+  //     'This is a test',
+  //     'https://scx1.b-cdn.net/csz/news/800/2016/howcuttingdo.jpg',
+  //     [new Ingredient('Meat', 1), new Ingredient('Potato', 10)]
+  //   ),
+  //   new Recipe(
+  //     'Hamburger',
+  //     'Tasty hamburger',
+  //     'https://scx1.b-cdn.net/csz/news/800/2016/howcuttingdo.jpg',
+  //     [new Ingredient('Bread', 2), new Ingredient('Tomato', 2)]
+  //   ),
+  // ];
+
+  private recipes: Recipe[] = [];
 
   getRecipe(recipeId: number) {
     return this.recipes[recipeId];
@@ -29,6 +31,11 @@ export class RecipeService {
 
   getRecipes() {
     return [...this.recipes];
+  }
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(recipes);
   }
 
   addRecipe(recipe: Recipe) {
